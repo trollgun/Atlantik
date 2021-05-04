@@ -26,24 +26,24 @@ namespace Atlantik
 
             foreach (SQLCategorie sqlCategorie in SQLCategorie.GetAllSQLCategorie(mySqlConnection))
             {
-                TextBox textBox = new TextBox();
-                textBox.Location = new System.Drawing.Point(145, 15 + 25 * i);
-                textBox.Name = "textBox" + sqlCategorie.ToString();
-                textBox.Size = new System.Drawing.Size(100, 20);
-                textBox.TabIndex = 0;
-                textBox.KeyPress += new KeyPressEventHandler(this.TextBoxCapacite_KeyPress);
-                dictionary_TextBox_SQLCategorie.Add(textBox, sqlCategorie);
+                TextBox textBoxCategorie = new TextBox();
+                textBoxCategorie.Location = new System.Drawing.Point(145, 15 + 25 * i);
+                textBoxCategorie.Name = "textBox" + sqlCategorie.ToString();
+                textBoxCategorie.Size = new System.Drawing.Size(100, 20);
+                textBoxCategorie.TabIndex = 0;
+                textBoxCategorie.KeyPress += new KeyPressEventHandler(this.TextBoxCapacite_KeyPress);
+                dictionary_TextBox_SQLCategorie.Add(textBoxCategorie, sqlCategorie);
 
-                Label label = new Label();
-                label.AutoSize = true;
-                label.Location = new System.Drawing.Point(5, 20 + 25 * i);
-                label.Name = "label" + sqlCategorie.ToString();
-                label.Size = new System.Drawing.Size(100, 15);
-                label.TabIndex = 0;
-                label.Text = sqlCategorie.ToString() + " :";
+                Label labelCategorie = new Label();
+                labelCategorie.AutoSize = true;
+                labelCategorie.Location = new System.Drawing.Point(5, 20 + 25 * i);
+                labelCategorie.Name = "label" + sqlCategorie.ToString();
+                labelCategorie.Size = new System.Drawing.Size(100, 15);
+                labelCategorie.TabIndex = 0;
+                labelCategorie.Text = sqlCategorie.ToString() + " :";
 
-                groupBoxCapacitesMaximalesParType.Controls.Add(textBox);
-                groupBoxCapacitesMaximalesParType.Controls.Add(label);
+                groupBoxCapacitesMaximalesParType.Controls.Add(textBoxCategorie);
+                groupBoxCapacitesMaximalesParType.Controls.Add(labelCategorie);
 
                 i++;
             }
@@ -86,16 +86,15 @@ namespace Atlantik
                 {
                     message += "Ajout du bateau '" + textBoxBateau.Text + "' : réussi\n";
                     mySqlConnection.Close();
-                    List<SQLBateau> listSQLBateau = SQLBateau.GetAllSQLBateau(mySqlConnection);
                     mySqlConnection.Open();
-                    SQLBateau sqlBateau = listSQLBateau[listSQLBateau.Count - 1];
                     foreach (TextBox textBox in dictionary_TextBox_SQLCategorie.Keys)
                     {
                         mySqlCommand = new MySqlCommand("INSERT INTO `contenir`(`lettrecategorie`, `nobateau`, `capacitemax`) VALUES " +
                             "(@lettreCategorie, @noBateau, @capaciteMax)", mySqlConnection);
 
                         dictionary_TextBox_SQLCategorie.TryGetValue(textBox, out SQLCategorie sqlCategorie);
-                        mySqlCommand.Parameters.AddWithValue("@noBateau", sqlBateau.GetNobateau());
+                        MessageBox.Show(SQLBateau.GetLastInsertId().ToString());
+                        mySqlCommand.Parameters.AddWithValue("@noBateau", SQLBateau.GetLastInsertId());
                         mySqlCommand.Parameters.AddWithValue("@lettreCategorie", sqlCategorie.GetLettrecategorie());
                         mySqlCommand.Parameters.AddWithValue("@capaciteMax", double.Parse(textBox.Text));
                         if (mySqlCommand.ExecuteNonQuery() == 1) message += "Ajout de la capacité '" + sqlCategorie.ToString() + "' réussi\n";
