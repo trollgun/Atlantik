@@ -13,7 +13,7 @@ namespace Atlantik
 {
     public partial class FormAtlantik : Form
     {
-
+        //%zfk!23F 
         private static MySqlConnection mySqlConnection = new MySqlConnection("Server=localhost;Database=atlantik;port=3306;User Id=root;password=");
 
         private Dictionary<ToolStripMenuItem, Form> dictionary_ToolStripMenuItem_Form = new Dictionary<ToolStripMenuItem, Form>();
@@ -46,9 +46,10 @@ namespace Atlantik
                 mySqlConnection.Open();
                 mySqlConnection.Close();
             }
-            catch
+            catch(Exception e)
             {
                 DialogResult echecConnexionBDD = MessageBox.Show("Connexion à la base de données : Échec", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(e.Message, "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 if (echecConnexionBDD.Equals(DialogResult.OK))
                 {
                     System.Environment.Exit(0);

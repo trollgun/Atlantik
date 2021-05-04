@@ -65,5 +65,34 @@ namespace Atlantik
             foreach (SQLBateau sqlBateau in GetAllSQLBateau(mySqlConnection)) comboBoxBateau.Items.Add(sqlBateau);
         }
 
+        public static int GetLastInsertId()
+        {
+            int lastInsertId = -1;
+            MySqlConnection mySqlConnection = new MySqlConnection(FormAtlantik.GetMySqlConnection().ConnectionString);
+
+            try
+            {
+                mySqlConnection.Open();
+                MySqlCommand mySqlCommand = new MySqlCommand("SELECT LAST_INSERT_ID(`nobateau`) FROM `bateau`", mySqlConnection);
+                using (MySqlDataReader reader = mySqlCommand.ExecuteReader())
+                {
+                    if (reader.HasRows)
+                    {
+                        while (reader.Read())
+                        {
+                            lastInsertId = reader.GetInt16(0);
+                        }
+                    }
+                }
+                mySqlConnection.Close();
+            }
+            finally
+            {
+                if (mySqlConnection.State.Equals(ConnectionState.Open)) mySqlConnection.Close();
+            }
+
+            return lastInsertId;
+        }
+
     }
 }

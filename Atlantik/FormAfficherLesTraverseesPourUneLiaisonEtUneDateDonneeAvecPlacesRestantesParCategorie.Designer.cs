@@ -45,44 +45,50 @@ namespace Atlantik
             // labelLiaison
             // 
             this.labelLiaison.AutoSize = true;
-            this.labelLiaison.Location = new System.Drawing.Point(161, 9);
+            this.labelLiaison.Location = new System.Drawing.Point(215, 11);
+            this.labelLiaison.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelLiaison.Name = "labelLiaison";
-            this.labelLiaison.Size = new System.Drawing.Size(46, 13);
+            this.labelLiaison.Size = new System.Drawing.Size(61, 17);
             this.labelLiaison.TabIndex = 20;
             this.labelLiaison.Text = "Liaison :";
             // 
             // comboBoxLiaison
             // 
             this.comboBoxLiaison.FormattingEnabled = true;
-            this.comboBoxLiaison.Location = new System.Drawing.Point(161, 27);
+            this.comboBoxLiaison.Location = new System.Drawing.Point(215, 33);
+            this.comboBoxLiaison.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.comboBoxLiaison.Name = "comboBoxLiaison";
-            this.comboBoxLiaison.Size = new System.Drawing.Size(121, 21);
+            this.comboBoxLiaison.Size = new System.Drawing.Size(160, 24);
             this.comboBoxLiaison.TabIndex = 19;
             // 
             // labelSecteur
             // 
             this.labelSecteur.AutoSize = true;
-            this.labelSecteur.Location = new System.Drawing.Point(12, 9);
+            this.labelSecteur.Location = new System.Drawing.Point(16, 11);
+            this.labelSecteur.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelSecteur.Name = "labelSecteur";
-            this.labelSecteur.Size = new System.Drawing.Size(55, 13);
+            this.labelSecteur.Size = new System.Drawing.Size(72, 17);
             this.labelSecteur.TabIndex = 18;
             this.labelSecteur.Text = "Secteurs :";
             // 
             // listBoxSecteur
             // 
             this.listBoxSecteur.FormattingEnabled = true;
-            this.listBoxSecteur.Location = new System.Drawing.Point(15, 25);
+            this.listBoxSecteur.ItemHeight = 16;
+            this.listBoxSecteur.Location = new System.Drawing.Point(20, 31);
+            this.listBoxSecteur.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.listBoxSecteur.Name = "listBoxSecteur";
-            this.listBoxSecteur.Size = new System.Drawing.Size(120, 225);
+            this.listBoxSecteur.Size = new System.Drawing.Size(159, 276);
             this.listBoxSecteur.TabIndex = 17;
             this.listBoxSecteur.SelectedIndexChanged += new System.EventHandler(this.ListBoxSecteur_SelectedIndexChanged);
             // 
             // labelDate
             // 
             this.labelDate.AutoSize = true;
-            this.labelDate.Location = new System.Drawing.Point(341, 9);
+            this.labelDate.Location = new System.Drawing.Point(455, 11);
+            this.labelDate.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelDate.Name = "labelDate";
-            this.labelDate.Size = new System.Drawing.Size(36, 13);
+            this.labelDate.Size = new System.Drawing.Size(46, 17);
             this.labelDate.TabIndex = 28;
             this.labelDate.Text = "Date :";
             // 
@@ -90,16 +96,18 @@ namespace Atlantik
             // 
             this.dateTimePickerDateTraversee.CustomFormat = "hh:mm - dd/MM/yyyy";
             this.dateTimePickerDateTraversee.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dateTimePickerDateTraversee.Location = new System.Drawing.Point(344, 27);
+            this.dateTimePickerDateTraversee.Location = new System.Drawing.Point(459, 33);
+            this.dateTimePickerDateTraversee.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.dateTimePickerDateTraversee.Name = "dateTimePickerDateTraversee";
-            this.dateTimePickerDateTraversee.Size = new System.Drawing.Size(121, 20);
+            this.dateTimePickerDateTraversee.Size = new System.Drawing.Size(160, 22);
             this.dateTimePickerDateTraversee.TabIndex = 27;
             // 
             // buttonAfficher
             // 
-            this.buttonAfficher.Location = new System.Drawing.Point(528, 27);
+            this.buttonAfficher.Location = new System.Drawing.Point(704, 33);
+            this.buttonAfficher.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.buttonAfficher.Name = "buttonAfficher";
-            this.buttonAfficher.Size = new System.Drawing.Size(98, 23);
+            this.buttonAfficher.Size = new System.Drawing.Size(131, 28);
             this.buttonAfficher.TabIndex = 29;
             this.buttonAfficher.Text = "Afficher";
             this.buttonAfficher.UseVisualStyleBackColor = true;
@@ -114,9 +122,10 @@ namespace Atlantik
             this.listViewInfo.FullRowSelect = true;
             this.listViewInfo.GridLines = true;
             this.listViewInfo.HideSelection = false;
-            this.listViewInfo.Location = new System.Drawing.Point(161, 68);
+            this.listViewInfo.Location = new System.Drawing.Point(215, 84);
+            this.listViewInfo.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.listViewInfo.Name = "listViewInfo";
-            this.listViewInfo.Size = new System.Drawing.Size(465, 182);
+            this.listViewInfo.Size = new System.Drawing.Size(619, 223);
             this.listViewInfo.TabIndex = 30;
             this.listViewInfo.UseCompatibleStateImageBehavior = false;
             this.listViewInfo.View = System.Windows.Forms.View.Details;
@@ -136,9 +145,9 @@ namespace Atlantik
             // 
             // FormAfficherLesTraverseesPourUneLiaisonEtUneDateDonneeAvecPlacesRestantesParCategorie
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(638, 316);
+            this.ClientSize = new System.Drawing.Size(851, 389);
             this.Controls.Add(this.listViewInfo);
             this.Controls.Add(this.buttonAfficher);
             this.Controls.Add(this.labelDate);
@@ -147,10 +156,9 @@ namespace Atlantik
             this.Controls.Add(this.comboBoxLiaison);
             this.Controls.Add(this.labelSecteur);
             this.Controls.Add(this.listBoxSecteur);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "FormAfficherLesTraverseesPourUneLiaisonEtUneDateDonneeAvecPlacesRestantesParCateg" +
     "orie";
-            this.Text = "Afficher les traversées pour une liaison et une date donnée avec places restantes" +
-    " par catégorie";
             this.Load += new System.EventHandler(this.FormAfficherLesTraverseesPourUneLiaisonEtUneDateDonneeAvecPlacesRestantesParCategorie_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

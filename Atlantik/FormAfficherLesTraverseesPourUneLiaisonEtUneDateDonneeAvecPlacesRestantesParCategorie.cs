@@ -52,9 +52,9 @@ namespace Atlantik
 
             try
             {
-                MySqlCommand mySqlCommand = new MySqlCommand("SELECT traversee.notraversee, traversee.dateheuredepart, bateau.nom FROM `traversee`, `bateau` " +
-                    "WHERE traversee.nobateau = bateau.nobateau and traversee.noliaison = @noLiaison and traversee.dateheuredepart > @date1 " +
-                    "and traversee.dateheuredepart < @date2", mySqlConnection);
+                MySqlCommand mySqlCommand = new MySqlCommand("SELECT traversee.notraversee, traversee.dateheuredepart, bateau.nom, bateau.nobateau FROM `traversee`, `bateau` " +
+                    "WHERE traversee.nobateau = bateau.nobateau and traversee.noliaison = @noLiaison and traversee.dateheuredepart between @date1 " +
+                    "and @date2", mySqlConnection);
                 mySqlCommand.Parameters.AddWithValue("@noLiaison", ((SQLLiaison)comboBoxLiaison.SelectedItem).GetNoliaison());
                 mySqlCommand.Parameters.AddWithValue("@date1", dateTimePickerDateTraversee.Value.Date.ToString("yyyy-MM-dd 00:00:00"));
                 mySqlCommand.Parameters.AddWithValue("@date2", dateTimePickerDateTraversee.Value.Date.ToString("yyyy-MM-dd 23:59:59"));
@@ -69,12 +69,10 @@ namespace Atlantik
 
                             MySqlConnection mySqlConnectionBis = new MySqlConnection(mySqlConnection.ConnectionString);
                             mySqlConnectionBis.Open();
-                            MySqlCommand mySqlCommand2 = new MySqlCommand("SELECT categorie.lettrecategorie, sum(enregistrer.quantite) FROM `categorie` " +
-                                "left outer join enregistrer on (enregistrer.lettrecategorie = categorie.lettrecategorie) " +
-                                "where enregistrer.noreservation in (" +
-                                "SELECT reservation.noreservation from reservation where reservation.notraversee = @noTraversee) " +
-                                "group by categorie.lettrecategorie", mySqlConnectionBis);
-                            mySqlCommand2.Parameters.AddWithValue("@noTraversee", reader.GetInt16(0));                                                        
+                            MySqlCommand mySqlCommand2 = new MySqlCommand("call create_temporary_table_place_restante(@noTraversee,@noBateau);" +
+                                "select value from get_place_restante_out; ", mySqlConnectionBis);
+                            mySqlCommand2.Parameters.AddWithValue("@noTraversee", reader.GetInt16(0));
+                            mySqlCommand2.Parameters.AddWithValue("@noBateau", reader.GetInt16(3));
                             List<string> listItems = new List<string>();
                             listItems.Add(reader.GetInt16(0).ToString());
                             listItems.Add(reader.GetDateTime(1).ToString("hh-mm"));
@@ -85,7 +83,7 @@ namespace Atlantik
                                 {
                                     while (reader2.Read())
                                     {
-                                        listItems.Add(reader2.GetInt16(1).ToString());
+                                        listItems.Add(reader2.GetInt16(0).ToString());
                                     }
                                 }
                             }
